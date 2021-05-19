@@ -2,8 +2,12 @@ server:
   port: 8080
 spring:
   datasource:
-    url: "jdbc:h2:mem:testdb;INIT=CREATE SCHEMA IF NOT EXISTS TEST"
-    driverClassName: org.h2.Driver
-    username: sa
-    password: password
-
+    url: jdbc:mysql://${RDS_HOSTNAME:db}:${RDS_PORT:3306}/${RDS_DB_NAME:academy-db-local}
+    username: ${RDS_USERNAME:admin}
+    password: ${RDS_PASSWORD:Academy1!}
+  jpa:
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQL57Dialect
+    hibernate:
+      ddl-auto: update

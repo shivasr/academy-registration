@@ -1,0 +1,24 @@
+version: '3.3'
+services:
+  academy-mysql:
+    image: mysql:8.0
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_DATABASE=academy-db-local
+      - MYSQL_USER=admin
+      - MYSQL_PASSWORD=password
+    ports:
+      - 3306:3306
+  academy-main:
+    build: .
+    restart: on-failure
+    depends_on:
+      - academy-mysql
+    ports:
+      - 8080:8080
+    environment:
+      - RDS_HOSTNAME=academy-mysql
+      - RDS_USERNAME=admin
+      - RDS_PASSWORD=password
+      - RDS_DB_NAME=academy-db-local
+      - RDS_PORT=3306

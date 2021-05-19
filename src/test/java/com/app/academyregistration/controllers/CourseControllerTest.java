@@ -25,7 +25,7 @@ public class CourseControllerTest {
         Course course = Course.builder()
                         .name("Certified Solution Architect Associate").build();
 
-        mockMvc.perform(post("/")
+        mockMvc.perform(post("/api/v1/courses")
                 .accept(MediaType.APPLICATION_JSON)
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(new Gson().toJson(course)))

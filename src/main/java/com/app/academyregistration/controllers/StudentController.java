@@ -5,11 +5,13 @@ import com.app.academyregistration.models.Student;
 import com.app.academyregistration.services.StudentService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.util.UriComponents;
+import org.springframework.web.util.UriComponentsBuilder;
 
 import java.util.List;
 
 @RestController
-@RequestMapping("/students")
+@RequestMapping("/api/v1/students")
 public class StudentController {
 
     private final StudentService studentService;
@@ -45,7 +47,9 @@ public class StudentController {
     public @ResponseBody
     ResponseEntity<Student> createStudent(@RequestBody Student student) {
        Student savedStudent = studentService.createOrUpdateStudent(student);
-       return ResponseEntity.ok(savedStudent);
+        UriComponents uriComponents = UriComponentsBuilder.fromUriString("/students/{id}")
+                .buildAndExpand(savedStudent.getId());
+        return ResponseEntity.created(uriComponents.toUri()).body(savedStudent);
     }
 
     /**

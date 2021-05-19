@@ -9,13 +9,15 @@ import org.jetbrains.annotations.NotNull;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.util.UriComponents;
+import org.springframework.web.util.UriComponentsBuilder;
 
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping("/courses")
+@RequestMapping("/api/v1/courses")
 public class CourseController {
 
     // Student Service to manage students data
@@ -62,7 +64,9 @@ public class CourseController {
     public @ResponseBody
     ResponseEntity<Course> createCourse(@RequestBody Course course) {
        Course savedCourse = courseService.createOrUpdateCourse(course);
-       return ResponseEntity.ok(savedCourse);
+        UriComponents uriComponents = UriComponentsBuilder.fromUriString("/courses/{id}")
+                .buildAndExpand(savedCourse.getId());
+       return ResponseEntity.created(uriComponents.toUri()).body(savedCourse);
     }
 
     /**
