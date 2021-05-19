@@ -1,7 +1,7 @@
 # academy-registration
 Academy Registration App
 
-This is a Spring project demonstrating URL shortener. This is a dockerized solution . The docker image is available in 
+This is a Spring project demonstrating academy registration. This is a dockerized solution . The docker image is available in 
 the docker hub at: shivasr/academy-app:1.0.0.
 
 Run com.app.academyregistration.AcademyRegistrationApplication as a Java Application.
