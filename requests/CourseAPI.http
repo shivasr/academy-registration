@@ -1,0 +1,23 @@
+POST http://localhost:8080/courses
+Content-Type: application/json
+
+{
+  "name": "Certified Solution Architect Associate"
+}
+
+###
+GET http://localhost:8080/courses
+Content-Type: application/json
+
+###
+GET http://localhost:8080/courses/1
+Content-Type: application/json
+
+###
+
+PATCH http://localhost:8080/courses/1
+Content-Type: application/json
+
+{
+  "professors" : [1, 2]
+}
